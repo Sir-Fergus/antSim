@@ -34,7 +34,7 @@ int ENVIRONMENT::createEnvironment(unsigned int sizeX, unsigned int sizeY)
 
 		for(j=0; j<sizeY-1; j++)
 		{
-			if(i==0 && j==0) continue;  //Bei ersten element nichts zu tun
+			//if(i==0 && j==0) continue;  //Bei ersten element nichts zu tun --
 
 			newArea= new AREA;
 			newArea->north = lastArea;
@@ -42,7 +42,10 @@ int ENVIRONMENT::createEnvironment(unsigned int sizeX, unsigned int sizeY)
 			if(i!=0)
 			{
 				newArea->west = lastArea->west->south;
-				//lastArea->north->west->south->east = newArea;
+				if(j!=0)
+				{
+					lastArea->north->west->south->east = newArea;
+				}
 			}
 			lastArea->south= newArea;
 			lastArea = newArea;
