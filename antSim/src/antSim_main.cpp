@@ -12,8 +12,10 @@
 
 int main()
 {
-	ENVIRONMENT* env = ENVIRONMENT::createInstance(5,5);
+	ENVIRONMENT* env;
 
+	env = ENVIRONMENT::createInstance(5,5);
+	env = ENVIRONMENT::createInstance(8,8);
 
 	env->printEnvironment();
 	return 0;
