@@ -11,7 +11,7 @@
 #include <iostream>
 #include <string>
 
-#include "AREA.h"
+#include "../header/AREA.h"
 
 using namespace std;
 

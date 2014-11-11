@@ -5,9 +5,10 @@
  *      Author: Gerold
  */
 
-#include "WATER.h"
+#include <string>
 
-namespace std {
+#include "../header/WATER.h"
+
 
 WATER::WATER() {
 	// TODO Auto-generated constructor stub
@@ -18,4 +19,9 @@ WATER::~WATER() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace std */
+void WATER::act()
+{
+
+	cout << "Water" << endl;
+}
+

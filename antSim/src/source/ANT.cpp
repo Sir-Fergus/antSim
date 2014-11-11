@@ -5,12 +5,7 @@
  *      Author: Gerold
  */
 
-#include "ANT.h"
-
-namespace std
-{
-
-
+#include "../header/ANT.h"
 
 ANT::ANT()
 {
@@ -23,10 +18,11 @@ ANT::~ANT()
 
 
 }
-ANT::act()
+
+void ANT::act()
 {
 
-
+	cout << "Ameise" << endl;
 }
 
-} /* namespace std */
+

@@ -8,7 +8,7 @@
 #ifndef SRC_ITEM_H_
 #define SRC_ITEM_H_
 
-namespace std {
+using namespace std;
 
 class ITEM {
 public:
@@ -19,7 +19,5 @@ public:
 	ITEM();
 	virtual ~ITEM();
 };
-
-} /* namespace std */
 
 #endif /* SRC_ITEM_H_ */

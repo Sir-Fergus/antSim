@@ -11,11 +11,11 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "ITEM.h"
+#include "../header/ITEM.h"
 
 using namespace std;
 
-class ANT
+class ANT : public ITEM
 {
 	public:
 

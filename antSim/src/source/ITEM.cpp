@@ -1,21 +1,21 @@
 /*
- * FOOD.cpp
+ * ITEM.cpp
  *
  *  Created on: 11.11.2014
  *      Author: Gerold
  */
 
-#include "FOOD.h"
+#include "../header/ITEM.h"
 
-namespace std {
 
-FOOD::FOOD() {
+
+ITEM::ITEM() {
 	// TODO Auto-generated constructor stub
 
 }
 
-FOOD::~FOOD() {
+ITEM::~ITEM() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace std */
+

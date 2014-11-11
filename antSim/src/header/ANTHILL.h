@@ -8,14 +8,21 @@
 #ifndef SRC_ANTHILL_H_
 #define SRC_ANTHILL_H_
 
-namespace std {
+#include <iostream>
+#include "../header/ITEM.h"
 
-class ANTHILL {
+using namespace std;
+
+
+class ANTHILL : public ITEM
+{
 public:
+
+	void act();
+
 	ANTHILL();
 	~ANTHILL();
 };
 
-} /* namespace std */
 
 #endif /* SRC_ANTHILL_H_ */

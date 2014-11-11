@@ -7,10 +7,8 @@
 
 
 
-#include "AREA.h"
+#include "../header/AREA.h"
 
-namespace std
-{
 
 AREA::AREA()
 {
@@ -26,5 +24,4 @@ AREA::~AREA()
 
 }
 
-} /* namespace std */
 

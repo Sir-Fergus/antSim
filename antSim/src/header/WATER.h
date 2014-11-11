@@ -8,14 +8,19 @@
 #ifndef SRC_WATER_H_
 #define SRC_WATER_H_
 
-namespace std {
+#include <iostream>
+#include "../header/ITEM.h"
 
-class WATER {
+using namespace std;
+
+class WATER : public ITEM
+{
 public:
+
+	void act();
+
 	WATER();
 	virtual ~WATER();
 };
-
-} /* namespace std */
 
 #endif /* SRC_WATER_H_ */

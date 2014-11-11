@@ -8,14 +8,22 @@
 #ifndef SRC_FOOD_H_
 #define SRC_FOOD_H_
 
-namespace std {
+#include <iostream>
+#include "../header/ITEM.h"
 
-class FOOD {
+
+using namespace std;
+
+
+class FOOD : public ITEM
+{
 public:
+
+	void act();
+
 	FOOD();
 	virtual ~FOOD();
 };
 
-} /* namespace std */
 
 #endif /* SRC_FOOD_H_ */
