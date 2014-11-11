@@ -18,7 +18,7 @@ class AREA
 {
 	public:
 
-		list<int> items;	//Build own ITEM class?? Pheromon, Food, Water, Obstacle reduced speed
+		list<ITEM *> items;	//Build own ITEM class?? Pheromon, Food, Water, Obstacle reduced speed
 		AREA *north;	//Neighbour Field Up
 		AREA *south;	//Neighbour Field Down
 		AREA *west;		//Neighbour Field Left

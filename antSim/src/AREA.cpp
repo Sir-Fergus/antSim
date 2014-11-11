@@ -7,7 +7,7 @@
 
 
 
-#include "area.h"
+#include "AREA.h"
 
 AREA::AREA()
 {

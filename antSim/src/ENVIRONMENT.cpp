@@ -5,7 +5,7 @@
  *      Author: Gerold
  */
 
-#include "environment.h"
+#include "ENVIRONMENT.h"
 
 ENVIRONMENT::ENVIRONMENT()
 {
