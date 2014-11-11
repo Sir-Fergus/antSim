@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include "ITEM.h"
 
 using namespace std;
 
@@ -19,9 +20,10 @@ class ANT
 	public:
 
 	unsigned int age;
-	string	role;
- 	list<int> payload;
+	//string	role;
+ 	list<ITEM *> payload;
 
+ 	void act();
 
 	ANT();
 	~ANT();

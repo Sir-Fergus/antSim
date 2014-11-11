@@ -9,6 +9,9 @@
 
 #include "AREA.h"
 
+namespace std
+{
+
 AREA::AREA()
 {
 	this->north=NULL;
@@ -23,4 +26,5 @@ AREA::~AREA()
 
 }
 
+} /* namespace std */
 

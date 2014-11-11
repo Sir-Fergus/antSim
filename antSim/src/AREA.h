@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <list>
+#include "ITEM.h"
 
 using namespace std;
 
@@ -18,11 +19,12 @@ class AREA
 {
 	public:
 
-		list<ITEM *> items;	//Build own ITEM class?? Pheromon, Food, Water, Obstacle reduced speed
+		list<ITEM *> itemsOnArea;
 		AREA *north;	//Neighbour Field Up
 		AREA *south;	//Neighbour Field Down
 		AREA *west;		//Neighbour Field Left
 		AREA *east;		//Neighbour Field Right
+
 
 	AREA();
 	~AREA();
