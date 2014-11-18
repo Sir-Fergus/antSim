@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "../header/ENVIRONMENT.h"
+#include "../header/FACTORY.h"
 #include "../header/ITEM.h"
 #include "../header/ANT.h"
 #include "../header/ANTHILL.h"
@@ -40,6 +41,8 @@ int main()
 		(*list_iter)->act();
 
 	}
+
+
 
 	env->printEnvironment();
 	return 0;

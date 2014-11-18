@@ -19,18 +19,22 @@ class ENVIRONMENT
 {
 	public:
 
-	AREA *startArea;
+		AREA *startArea;
+		unsigned int sizeX;
+		unsigned int sizeY;
 
-	void printEnvironment();
-	static ENVIRONMENT* createInstance(unsigned int sizeX, unsigned int sizeY);
-	~ENVIRONMENT();
+		void printEnvironment();
+		static ENVIRONMENT* createInstance(unsigned int sizeX, unsigned int sizeY);
+		void placeInital(unsigned int ant, unsigned int food, unsigned int water);
+
+		~ENVIRONMENT();
 
 	private:
 
-	int envExists;
+		int envExists;
 
-	ENVIRONMENT();
-	int createEnvironment(unsigned int sizeX, unsigned int sizeY);
+		ENVIRONMENT();
+		int createEnvironment(unsigned int sizeX, unsigned int sizeY);
 };
 
 

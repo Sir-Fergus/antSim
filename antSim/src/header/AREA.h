@@ -25,6 +25,10 @@ class AREA
 		AREA *west;		//Neighbour Field Left
 		AREA *east;		//Neighbour Field Right
 
+		void placeAnt();
+		void placeAnthill();
+		void placeFood();
+		void placeWater();
 
 	AREA();
 	~AREA();

@@ -12,7 +12,8 @@ ENVIRONMENT::ENVIRONMENT()
 
 	this->startArea= new AREA;
 	this->envExists= 0;
-
+	this->sizeX = 0;
+	this->sizeY = 0;
 }
 
 ENVIRONMENT::~ENVIRONMENT()
@@ -108,7 +109,38 @@ ENVIRONMENT* ENVIRONMENT::createInstance(unsigned int sizeX, unsigned int sizeY)
 	{
 		instance.createEnvironment(sizeX,sizeY);
 		instance.envExists = 1;
+		instance.sizeX = sizeX;
+		instance.sizeY = sizeY;
 	}
 
 	return &instance;
 }
+
+void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int water)
+{
+	unsigned int i, j, k;
+	AREA* currArea;
+
+	currArea = this->startArea;
+
+		for(i=0; i<this->sizeX; i++)
+		{
+			for(k=0; k<i; k++) //In neue spalte springen
+			{
+				currArea = currArea->east;
+			}
+
+			for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
+			{
+				if(i == sizeX/2 && j == sizeY/2)
+				{
+					//Anthill erzeugen
+				}
+				currArea = currArea->south;
+			}
+			currArea = startArea;
+
+		}
+}
+
+
