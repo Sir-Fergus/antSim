@@ -25,10 +25,7 @@ int main()
 
 	for(i=0;i<=3;i++)
 	{
-		env->startArea->itemsOnArea.push_front(new ANT);
-		env->startArea->itemsOnArea.push_front(new ANTHILL);
-		env->startArea->itemsOnArea.push_front(new FOOD);
-		env->startArea->itemsOnArea.push_front(new WATER);
+		env->startArea->placeAnt();
 	}
 
 

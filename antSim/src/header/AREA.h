@@ -12,6 +12,7 @@
 #include <iostream>
 #include <list>
 #include "../header/ITEM.h"
+#include "../header/FACTORY.h"
 
 using namespace std;
 
@@ -24,6 +25,7 @@ class AREA
 		AREA *south;	//Neighbour Field Down
 		AREA *west;		//Neighbour Field Left
 		AREA *east;		//Neighbour Field Right
+		FACTORY* factory;
 
 		void placeAnt();
 		void placeAnthill();
