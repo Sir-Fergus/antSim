@@ -18,29 +18,13 @@
 
 int main()
 {
-	int i;
 	ENVIRONMENT* env;
-	list<ITEM *> list;
-	env = ENVIRONMENT::createInstance(5,5);
-
-	for(i=0;i<=3;i++)
-	{
-		env->startArea->placeAnt();
-	}
-
-
-	list = env->startArea->itemsOnArea;
-
-	for(std::list<ITEM *>::iterator list_iter = list.begin();
-	    list_iter != list.end(); list_iter++)
-	{
-
-		(*list_iter)->act();
-
-	}
+	env = ENVIRONMENT::createInstance(3,3);
 
 
 
+	env->placeInital(10,10,10);
+	env->actAll();
 	env->printEnvironment();
 	return 0;
 }

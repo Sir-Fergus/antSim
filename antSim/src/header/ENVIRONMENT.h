@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <stdlib.h>
 
 #include "../header/AREA.h"
 
@@ -26,6 +28,7 @@ class ENVIRONMENT
 		void printEnvironment();
 		static ENVIRONMENT* createInstance(unsigned int sizeX, unsigned int sizeY);
 		void placeInital(unsigned int ant, unsigned int food, unsigned int water);
+		void actAll();
 
 		~ENVIRONMENT();
 

@@ -100,7 +100,39 @@ void ENVIRONMENT::printEnvironment()
 	}
 
 	cout<<"X"<<endl;
+
+
+
+	/*Eventuell Einen Printmodus für die Ausgabe der Listen auf den Areas machen
+	 *
+	 * currArea = env->startArea;
+
+	for(i=0; i<env->sizeX; i++)
+	{
+		for(k=0; k<i; k++) //In neue spalte springen
+		{
+			currArea = currArea->east;
+		}
+
+		for(j=0; j<env->sizeY; j++) //Spalte durchlaufen
+		{
+			list = currArea->itemsOnArea;
+			for(std::list<ITEM *>::iterator list_iter = list.begin(); list_iter != list.end(); list_iter++)
+						{
+
+							(*list_iter)->act();
+
+						}
+			currArea = currArea->south;
+		}
+		currArea = env->startArea;
+
+	}*/
+
 }
+
+
+
 
 ENVIRONMENT* ENVIRONMENT::createInstance(unsigned int sizeX, unsigned int sizeY)
 {
@@ -118,10 +150,15 @@ ENVIRONMENT* ENVIRONMENT::createInstance(unsigned int sizeX, unsigned int sizeY)
 
 void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int water)
 {
-	unsigned int i, j, k;
+	unsigned int i, j, k, i1, i2, r1, r2, randNum, cntAnt, cntFood, cntWater;
 	AREA* currArea;
 
 	currArea = this->startArea;
+	cntAnt = ant;
+	cntFood = food;
+	cntWater = water;
+	srand(time(0));
+
 
 		for(i=0; i<this->sizeX; i++)
 		{
@@ -134,13 +171,92 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 			{
 				if(i == sizeX/2 && j == sizeY/2)
 				{
-					//Anthill erzeugen
+					currArea->placeAnthill();
 				}
+
+				//for(i1=0;i1<r1;i1++) //Anzahl des Items welche auf File kommen Wie wird die vorgegebene zahl auf das feld zufällig aufgeteilt?
+
+				if(cntAnt != 0)		//place Ants on Area
+				{
+					randNum = rand()%3;
+					for(i1=0; i1<randNum; i1++)
+					{
+						if(cntAnt != 0)
+						{
+							currArea->placeAnt();
+							cntAnt--;
+						}
+					}
+				}
+
+				if(cntFood != 0)		//place Food on Area
+				{
+					randNum = rand()%3;
+					for(i1=0; i1<randNum; i1++)
+					{
+						if(cntFood != 0)
+						{
+							currArea->placeFood();
+							cntFood--;
+						}
+					}
+				}
+
+				if(cntWater != 0)		//place Water on Area
+				{
+					randNum = rand()%3;
+					for(i1=0; i1<randNum; i1++)
+					{
+						if(cntWater != 0)
+						{
+							currArea->placeWater();
+							cntWater--;
+						}
+					}
+				}
+
 				currArea = currArea->south;
 			}
 			currArea = startArea;
 
 		}
+
+		cout<<"Rest Ant: "<<cntAnt<<"\nRest Food: "<<cntFood<<"\nRest Water: "<<cntWater<<endl;
+
+}
+
+void ENVIRONMENT::actAll()
+{
+	unsigned int i, k, j;
+	AREA* currArea;
+	list<ITEM *> list;
+
+	currArea = this->startArea;
+
+	for(i=0; i<this->sizeX; i++)
+	{
+		for(k=0; k<i; k++) //In neue spalte springen
+		{
+			currArea = currArea->east;
+		}
+
+		for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
+		{
+			list = currArea->itemsOnArea;
+			//cout<<"----- AREA x: "<<i<<" y: "<<j<<" -----"<<endl;
+			for(std::list<ITEM *>::iterator list_iter = list.begin();
+							list_iter != list.end(); list_iter++)
+						{
+
+							(*list_iter)->act();
+
+						}
+			currArea = currArea->south;
+		}
+		currArea = this->startArea;
+	}
+
+
 }
 
 
