@@ -12,18 +12,21 @@
 #include "../header/ANTHILL.h"
 #include "../header/FOOD.h"
 #include "../header/WATER.h"
+//#include "../header/ITEM.h"
 
 using namespace std ;
+
+class ITEM; //forward declaration
 
 class FACTORY {
 public:
 
 	static FACTORY* create_instance();
 
-	ANT* createAnt();
-	ANTHILL* createAnthill();
-	FOOD* createFood();
-	WATER* createWater();
+	ITEM* createAnt();
+	ITEM* createAnthill();
+	ITEM* createFood();
+	ITEM* createWater();
 
 
 

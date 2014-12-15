@@ -13,6 +13,7 @@
 #include <time.h>
 #include <stdlib.h>
 
+
 #include "../header/AREA.h"
 
 using namespace std;
@@ -24,11 +25,11 @@ class ENVIRONMENT
 		AREA *startArea;
 		unsigned int sizeX;
 		unsigned int sizeY;
-
+		unsigned int tickCnt;
 		void printEnvironment();
 		static ENVIRONMENT* createInstance(unsigned int sizeX, unsigned int sizeY);
 		void placeInital(unsigned int ant, unsigned int food, unsigned int water);
-		void actAll();
+		void actAll(int mode);
 
 		~ENVIRONMENT();
 

@@ -29,20 +29,32 @@ AREA::~AREA()
 
 void AREA::placeAnt()
 {
-	this->itemsOnArea.push_front(this->factory->createAnt());
+	ITEM* item;
+	item = this->factory->createAnt();
+	item->ownArea = this;
+	this->itemsOnArea.push_front(item);
 }
 
 void AREA::placeAnthill()
 {
-	this->itemsOnArea.push_front(this->factory->createAnthill());
+	ITEM* item;
+	item = this->factory->createAnthill();
+	item->ownArea = this;
+	this->itemsOnArea.push_front(item);
 }
 
 void AREA::placeFood()
 {
-	this->itemsOnArea.push_front(this->factory->createFood());
+	ITEM* item;
+	item = this->factory->createFood();
+	item->ownArea = this;
+	this->itemsOnArea.push_front(item);
 }
 
 void AREA::placeWater()
 {
-	this->itemsOnArea.push_front(this->factory->createWater());
+	ITEM* item;
+		item = this->factory->createWater();
+		item->ownArea = this;
+		this->itemsOnArea.push_front(item);
 }

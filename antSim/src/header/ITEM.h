@@ -8,13 +8,16 @@
 #ifndef SRC_ITEM_H_
 #define SRC_ITEM_H_
 
+//#include "../header/AREA.h"
 
 using namespace std;
+
+class AREA; //forward declaration
 
 class ITEM {
 public:
 
-
+	AREA* ownArea;
 	virtual void act() = 0; //pure virtual
 
 	ITEM();

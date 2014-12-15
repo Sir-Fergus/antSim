@@ -10,7 +10,7 @@
 ANT::ANT()
 {
 
-	this->age = 0;
+	this->maxAge = 100;  //Default Age
 }
 
 ANT::~ANT()
@@ -21,6 +21,8 @@ ANT::~ANT()
 
 void ANT::act()
 {
+
+	//if(this->maxAge == this->ownArea->)
 
 	cout << "Ameise" << endl;
 }

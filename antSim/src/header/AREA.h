@@ -11,10 +11,12 @@
 
 #include <iostream>
 #include <list>
-#include "../header/ITEM.h"
 #include "../header/FACTORY.h"
 
 using namespace std;
+
+class ITEM; //forward declaration
+
 
 class AREA
 {

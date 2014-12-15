@@ -26,22 +26,22 @@ FACTORY* FACTORY::create_instance()
 
 }
 
-ANT* FACTORY::createAnt()
+ITEM* FACTORY::createAnt()
 {
 
 	return new ANT;
 }
-ANTHILL* FACTORY::createAnthill()
+ITEM* FACTORY::createAnthill()
 {
 
 	return new ANTHILL;
 }
-FOOD* FACTORY::createFood()
+ITEM* FACTORY::createFood()
 {
 
 	return new FOOD;
 }
-WATER* FACTORY::createWater()
+ITEM* FACTORY::createWater()
 {
 	return new WATER;
 }

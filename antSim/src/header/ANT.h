@@ -19,7 +19,7 @@ class ANT : public ITEM
 {
 	public:
 
-	unsigned int age;
+	unsigned int maxAge;
 	//string	role;
  	list<ITEM *> payload;
 

@@ -14,6 +14,7 @@ ENVIRONMENT::ENVIRONMENT()
 	this->envExists= 0;
 	this->sizeX = 0;
 	this->sizeY = 0;
+	this->tickCnt = 0;
 }
 
 ENVIRONMENT::~ENVIRONMENT()
@@ -150,7 +151,7 @@ ENVIRONMENT* ENVIRONMENT::createInstance(unsigned int sizeX, unsigned int sizeY)
 
 void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int water)
 {
-	unsigned int i, j, k, i1, i2, r1, r2, randNum, cntAnt, cntFood, cntWater;
+	unsigned int i, j, k, i1, randNum, cntAnt, cntFood, cntWater;
 	AREA* currArea;
 
 	currArea = this->startArea;
@@ -172,22 +173,31 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 				if(i == sizeX/2 && j == sizeY/2)
 				{
 					currArea->placeAnthill();
+					for(; cntAnt>0; cntAnt--)
+					{
+						currArea->placeAnt();
+					}
+					for(i1=0; i1<5; i1++)
+					{
+						currArea->placeFood();
+						currArea->placeWater();
+					}
 				}
 
 				//for(i1=0;i1<r1;i1++) //Anzahl des Items welche auf File kommen Wie wird die vorgegebene zahl auf das feld zufällig aufgeteilt?
 
-				if(cntAnt != 0)		//place Ants on Area
-				{
-					randNum = rand()%3;
-					for(i1=0; i1<randNum; i1++)
-					{
-						if(cntAnt != 0)
-						{
-							currArea->placeAnt();
-							cntAnt--;
-						}
-					}
-				}
+//				if(cntAnt != 0)		//place Ants on Area
+//				{
+//					randNum = rand()%3;
+//					for(i1=0; i1<randNum; i1++)
+//					{
+//						if(cntAnt != 0)
+//						{
+//							currArea->placeAnt();
+//							cntAnt--;
+//						}
+//					}
+//				}
 
 				if(cntFood != 0)		//place Food on Area
 				{
@@ -225,7 +235,7 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 
 }
 
-void ENVIRONMENT::actAll()
+void ENVIRONMENT::actAll(int mode)
 {
 	unsigned int i, k, j;
 	AREA* currArea;
@@ -243,7 +253,7 @@ void ENVIRONMENT::actAll()
 		for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
 		{
 			list = currArea->itemsOnArea;
-			//cout<<"----- AREA x: "<<i<<" y: "<<j<<" -----"<<endl;
+			if(mode == 1) cout<<"----- AREA x: "<<i<<" y: "<<j<<" -----"<<endl;
 			for(std::list<ITEM *>::iterator list_iter = list.begin();
 							list_iter != list.end(); list_iter++)
 						{
@@ -255,7 +265,7 @@ void ENVIRONMENT::actAll()
 		}
 		currArea = this->startArea;
 	}
-
+	this->tickCnt++;
 
 }
 
