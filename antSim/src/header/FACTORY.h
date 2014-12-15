@@ -17,6 +17,7 @@
 using namespace std ;
 
 class ITEM; //forward declaration
+class ENVIRONMENT; //forward declaration
 
 class FACTORY {
 public:
@@ -28,13 +29,14 @@ public:
 	ITEM* createFood();
 	ITEM* createWater();
 
-
+	void setDefaultMaxAgeGlobal(unsigned int maxAge);
 
 
 	~FACTORY();
 
 private:
 
+	unsigned int defaultMaxAgeGlobal;
 	FACTORY();
 
 };

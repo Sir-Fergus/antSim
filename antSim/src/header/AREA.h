@@ -29,10 +29,10 @@ class AREA
 		AREA *east;		//Neighbour Field Right
 		FACTORY* factory;
 
-		void placeAnt();
-		void placeAnthill();
-		void placeFood();
-		void placeWater();
+		ITEM* placeAnt(ITEM* transferItem);
+		ITEM* placeAnthill(ITEM* transferItem);
+		ITEM* placeFood(ITEM* transferItem);
+		ITEM* placeWater(ITEM* transferItem);
 
 	AREA();
 	~AREA();

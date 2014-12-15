@@ -9,16 +9,19 @@
 
 
 
-FOOD::FOOD() {
-	// TODO Auto-generated constructor stub
-
+FOOD::FOOD()
+{
+	this->hasTombstone = false;
+	this->ownArea = NULL;
+	this->age = 0;
+	this->changedList = false;
 }
 
 FOOD::~FOOD() {
 	// TODO Auto-generated destructor stub
 }
 
-void FOOD::act()
+void FOOD::act(unsigned int currTick)
 {
 
 	cout << "Food" << endl;

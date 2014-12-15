@@ -15,6 +15,7 @@ ENVIRONMENT::ENVIRONMENT()
 	this->sizeX = 0;
 	this->sizeY = 0;
 	this->tickCnt = 0;
+
 }
 
 ENVIRONMENT::~ENVIRONMENT()
@@ -158,6 +159,7 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 	cntAnt = ant;
 	cntFood = food;
 	cntWater = water;
+
 	srand(time(0));
 
 
@@ -170,17 +172,17 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 
 			for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
 			{
-				if(i == sizeX/2 && j == sizeY/2)
+				if(i == sizeX/2 && j == sizeY/2)	//place Anthill und Ants in the middle
 				{
-					currArea->placeAnthill();
+					currArea->placeAnthill(NULL);
 					for(; cntAnt>0; cntAnt--)
 					{
-						currArea->placeAnt();
+						currArea->placeAnt(NULL);
 					}
 					for(i1=0; i1<5; i1++)
 					{
-						currArea->placeFood();
-						currArea->placeWater();
+						currArea->placeFood(NULL);
+						currArea->placeWater(NULL);
 					}
 				}
 
@@ -206,7 +208,7 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 					{
 						if(cntFood != 0)
 						{
-							currArea->placeFood();
+							currArea->placeFood(NULL);
 							cntFood--;
 						}
 					}
@@ -219,7 +221,7 @@ void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int 
 					{
 						if(cntWater != 0)
 						{
-							currArea->placeWater();
+							currArea->placeWater(NULL);
 							cntWater--;
 						}
 					}
@@ -240,6 +242,7 @@ void ENVIRONMENT::actAll(int mode)
 	unsigned int i, k, j;
 	AREA* currArea;
 	list<ITEM *> list;
+	bool listEdited = false;
 
 	currArea = this->startArea;
 
@@ -253,14 +256,36 @@ void ENVIRONMENT::actAll(int mode)
 		for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
 		{
 			list = currArea->itemsOnArea;
+
 			if(mode == 1) cout<<"----- AREA x: "<<i<<" y: "<<j<<" -----"<<endl;
-			for(std::list<ITEM *>::iterator list_iter = list.begin();
-							list_iter != list.end(); list_iter++)
+
+			do //Iteration der Area Item List neu starten wenn etwas gelöscht wurde -> sonst besteht gefahr der Speicherzugriffsverletzung durch den Iterator
+			{
+				listEdited = false;
+
+				for(std::list<ITEM *>::iterator list_iter = list.begin(); list_iter != list.end(); list_iter++) //Durch Area Item List iterrieren und acten
+				{
+					if((*list_iter)->hasTombstone)
+					{
+						list.erase(list_iter);
+						listEdited = true;
+						break;
+					}
+					else if((*list_iter)->age <= this->tickCnt)
+					{
+						(*list_iter)->act(this->tickCnt);
+						(*list_iter)->age++;
+
+						if((*list_iter)->changedList)	//Wenn Act die ITEM List verändert hat Iteration neu starten.
 						{
-
-							(*list_iter)->act();
-
+							listEdited = true;
+							break;
 						}
+					}
+				}
+
+			}while(listEdited);
+
 			currArea = currArea->south;
 		}
 		currArea = this->startArea;

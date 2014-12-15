@@ -19,11 +19,10 @@ class ANT : public ITEM
 {
 	public:
 
-	unsigned int maxAge;
 	//string	role;
  	list<ITEM *> payload;
 
- 	void act();
+ 	void act(unsigned int currTick);
 
 	ANT();
 	~ANT();

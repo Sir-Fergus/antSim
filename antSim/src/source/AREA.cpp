@@ -27,34 +27,66 @@ AREA::~AREA()
 }
 
 
-void AREA::placeAnt()
+ITEM* AREA::placeAnt(ITEM* transferItem)
 {
 	ITEM* item;
-	item = this->factory->createAnt();
+	if(transferItem == NULL)
+	{
+		item = this->factory->createAnt();
+	}else
+	{
+		item = transferItem;
+	}
 	item->ownArea = this;
 	this->itemsOnArea.push_front(item);
+
+	return item;
 }
 
-void AREA::placeAnthill()
+ITEM* AREA::placeAnthill(ITEM* transferItem)
 {
 	ITEM* item;
-	item = this->factory->createAnthill();
+	if(transferItem == NULL)
+		{
+			item = this->factory->createAnthill();
+		}else
+		{
+			item = transferItem;
+		}
 	item->ownArea = this;
 	this->itemsOnArea.push_front(item);
+
+	return item;
 }
 
-void AREA::placeFood()
+ITEM* AREA::placeFood(ITEM* transferItem)
 {
 	ITEM* item;
-	item = this->factory->createFood();
+	if(transferItem == NULL)
+		{
+			item = this->factory->createFood();
+		}else
+		{
+			item = transferItem;
+		}
 	item->ownArea = this;
 	this->itemsOnArea.push_front(item);
+
+	return item;
 }
 
-void AREA::placeWater()
+ITEM* AREA::placeWater(ITEM* transferItem)
 {
 	ITEM* item;
-		item = this->factory->createWater();
+	if(transferItem == NULL)
+		{
+			item = this->factory->createWater();
+		}else
+		{
+			item = transferItem;
+		}
 		item->ownArea = this;
 		this->itemsOnArea.push_front(item);
+
+		return item;
 }

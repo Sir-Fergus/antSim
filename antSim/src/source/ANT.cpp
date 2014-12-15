@@ -9,8 +9,11 @@
 
 ANT::ANT()
 {
-
-	this->maxAge = 100;  //Default Age
+	this->hasTombstone = false;
+	this->ownArea = NULL;
+	this->maxAge = 9;  //Default MaxAge
+	this->age = 0;
+	this->changedList = false;
 }
 
 ANT::~ANT()
@@ -19,10 +22,11 @@ ANT::~ANT()
 
 }
 
-void ANT::act()
+void ANT::act(unsigned int currTick)
 {
+	if(this->maxAge == currTick) this->hasTombstone = true;
 
-	//if(this->maxAge == this->ownArea->)
+
 
 	cout << "Ameise" << endl;
 }

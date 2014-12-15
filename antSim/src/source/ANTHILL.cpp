@@ -8,15 +8,18 @@
 #include "../header/ANTHILL.h"
 
 ANTHILL::ANTHILL() {
-	// TODO Auto-generated constructor stub
 
+	this->hasTombstone = false;
+	this->ownArea = NULL;
+	this->age = 0;
+	this->changedList = false;
 }
 
 ANTHILL::~ANTHILL() {
 	// TODO Auto-generated destructor stub
 }
 
-void ANTHILL::act()
+void ANTHILL::act(unsigned int currTick)
 {
 
 	cout << "Ameisen Hügel" << endl;

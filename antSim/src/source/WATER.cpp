@@ -11,15 +11,18 @@
 
 
 WATER::WATER() {
-	// TODO Auto-generated constructor stub
 
+	this->hasTombstone = false;
+	this->ownArea = NULL;
+	this->age = 0;
+	this->changedList = false;
 }
 
 WATER::~WATER() {
 	// TODO Auto-generated destructor stub
 }
 
-void WATER::act()
+void WATER::act(unsigned int currTick)
 {
 
 	cout << "Water" << endl;

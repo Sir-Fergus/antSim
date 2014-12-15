@@ -10,7 +10,8 @@
 
 
 FACTORY::FACTORY() {
-	// TODO Auto-generated constructor stub
+
+	this->defaultMaxAgeGlobal = 0;
 
 }
 
@@ -28,24 +29,45 @@ FACTORY* FACTORY::create_instance()
 
 ITEM* FACTORY::createAnt()
 {
+	ITEM* newOne;
 
-	return new ANT;
+	newOne = new ANT;
+	newOne->maxAge = this->defaultMaxAgeGlobal;
+
+	return newOne;
 }
 ITEM* FACTORY::createAnthill()
 {
+	ITEM* newOne;
 
-	return new ANTHILL;
+	newOne = new ANTHILL;
+	newOne->maxAge = this->defaultMaxAgeGlobal;
+
+	return newOne;
 }
 ITEM* FACTORY::createFood()
 {
+	ITEM* newOne;
 
-	return new FOOD;
+	newOne = new FOOD;
+	newOne->maxAge = this->defaultMaxAgeGlobal;
+
+	return newOne;
 }
 ITEM* FACTORY::createWater()
 {
-	return new WATER;
+	ITEM* newOne;
+
+	newOne = new WATER;
+	newOne->maxAge = this->defaultMaxAgeGlobal;
+
+	return newOne;
 }
 
+void FACTORY::setDefaultMaxAgeGlobal(unsigned int maxAge)
+{
+	this->defaultMaxAgeGlobal = maxAge;
+}
 
 
 

@@ -18,7 +18,11 @@ class ITEM {
 public:
 
 	AREA* ownArea;
-	virtual void act() = 0; //pure virtual
+	bool hasTombstone;
+	bool changedList;
+	unsigned int age;
+	unsigned int maxAge;
+	virtual void act(unsigned int currTick) = 0; //pure virtual
 
 	ITEM();
 	virtual ~ITEM();
