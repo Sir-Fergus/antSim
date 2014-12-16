@@ -22,5 +22,4 @@ ANTHILL::~ANTHILL() {
 void ANTHILL::act(unsigned int currTick)
 {
 
-	cout << "Ameisen Hügel" << endl;
 }

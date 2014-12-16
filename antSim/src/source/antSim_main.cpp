@@ -9,13 +9,6 @@
 #include <iostream>
 
 #include "../header/ENVIRONMENT.h"
-#include "../header/FACTORY.h"
-#include "../header/AREA.h"
-#include "../header/ITEM.h"
-//#include "../header/ANT.h"
-//#include "../header/ANTHILL.h"
-//#include "../header/FOOD.h"
-//#include "../header/WATER.h"
 
 int main()
 {

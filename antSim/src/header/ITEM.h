@@ -9,8 +9,8 @@
 #define SRC_ITEM_H_
 
 //#include "../header/AREA.h"
-
-using namespace std;
+//
+//using namespace std;
 
 class AREA; //forward declaration
 

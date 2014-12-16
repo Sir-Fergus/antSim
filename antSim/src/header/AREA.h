@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <list>
+#include <typeinfo>
 #include "../header/FACTORY.h"
 
 using namespace std;
@@ -33,6 +34,13 @@ class AREA
 		ITEM* placeAnthill(ITEM* transferItem);
 		ITEM* placeFood(ITEM* transferItem);
 		ITEM* placeWater(ITEM* transferItem);
+
+		bool hasFood();
+		bool hasWater();
+
+		ITEM* getFood();
+		ITEM* getWater();
+
 
 	AREA();
 	~AREA();

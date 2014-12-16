@@ -90,3 +90,46 @@ ITEM* AREA::placeWater(ITEM* transferItem)
 
 		return item;
 }
+
+bool AREA::hasFood()
+{
+
+	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+	{
+		if(typeid((*list_iter)) == typeid(FOOD))
+		{
+			return 1; //Food found
+		}
+
+	}
+
+	return 0; //no Food found
+}
+
+bool AREA::hasWater()
+{
+
+	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+	{
+		if(typeid((*list_iter)) == typeid(WATER))
+		{
+			return 1; //Water found
+		}
+
+	}
+
+	return 0; //no Water found
+}
+
+ITEM* AREA::getFood()
+{
+
+	return NULL;
+}
+
+ITEM* AREA::getWater()
+{
+
+	return NULL;
+}
+
