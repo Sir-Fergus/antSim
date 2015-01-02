@@ -16,6 +16,8 @@
 
 #include "../header/AREA.h"
 
+class ITEM; //Forward decleration
+
 using namespace std;
 
 class ENVIRONMENT

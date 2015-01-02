@@ -19,7 +19,7 @@ class FOOD : public ITEM
 {
 public:
 
-	void act(unsigned int currTick);
+	void act(unsigned int currTick, int mode);
 
 	FOOD();
 	virtual ~FOOD();

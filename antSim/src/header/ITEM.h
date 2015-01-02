@@ -22,7 +22,7 @@ public:
 	bool changedList;
 	unsigned int age;
 	unsigned int maxAge;
-	virtual void act(unsigned int currTick) = 0; //pure virtual
+	virtual void act(unsigned int currTick, int mode) = 0; //pure virtual
 
 	ITEM();
 	virtual ~ITEM();

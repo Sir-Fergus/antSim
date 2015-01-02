@@ -22,13 +22,13 @@ ANT::~ANT()
 
 }
 
-void ANT::act(unsigned int currTick)
+void ANT::act(unsigned int currTick, int mode)
 {
 	if(this->maxAge == currTick) this->hasTombstone = true;
 
 
 
-	cout << "Ameise" << endl;
+	if(mode == 1) cout << "Ameise" << endl;
 }
 
 

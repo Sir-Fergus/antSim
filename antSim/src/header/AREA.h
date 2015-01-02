@@ -17,7 +17,7 @@
 using namespace std;
 
 class ITEM; //forward declaration
-
+class FACTORY; //Forward declaration
 
 class AREA
 {

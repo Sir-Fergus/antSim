@@ -30,7 +30,7 @@ AREA::~AREA()
 ITEM* AREA::placeAnt(ITEM* transferItem)
 {
 	ITEM* item;
-	if(transferItem == NULL)
+	if(transferItem == NULL)	//Create new Object if argument is NULL
 	{
 		item = this->factory->createAnt();
 	}else
@@ -46,7 +46,7 @@ ITEM* AREA::placeAnt(ITEM* transferItem)
 ITEM* AREA::placeAnthill(ITEM* transferItem)
 {
 	ITEM* item;
-	if(transferItem == NULL)
+	if(transferItem == NULL)	//Create new Object if argument is NULL
 		{
 			item = this->factory->createAnthill();
 		}else
@@ -62,7 +62,7 @@ ITEM* AREA::placeAnthill(ITEM* transferItem)
 ITEM* AREA::placeFood(ITEM* transferItem)
 {
 	ITEM* item;
-	if(transferItem == NULL)
+	if(transferItem == NULL)	//Create new Object if argument is NULL
 		{
 			item = this->factory->createFood();
 		}else
@@ -78,7 +78,7 @@ ITEM* AREA::placeFood(ITEM* transferItem)
 ITEM* AREA::placeWater(ITEM* transferItem)
 {
 	ITEM* item;
-	if(transferItem == NULL)
+	if(transferItem == NULL)	//Create new Object if argument is NULL
 		{
 			item = this->factory->createWater();
 		}else
@@ -96,7 +96,7 @@ bool AREA::hasFood()
 
 	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
 	{
-		if(typeid((*list_iter)) == typeid(FOOD))
+		if(typeid(*(*list_iter)) == typeid(FOOD))
 		{
 			return 1; //Food found
 		}
@@ -109,9 +109,9 @@ bool AREA::hasFood()
 bool AREA::hasWater()
 {
 
-	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren
 	{
-		if(typeid((*list_iter)) == typeid(WATER))
+		if(typeid(*(*list_iter)) == typeid(WATER))
 		{
 			return 1; //Water found
 		}
@@ -123,12 +123,46 @@ bool AREA::hasWater()
 
 ITEM* AREA::getFood()
 {
+	ITEM* item;
+
+	if(this->hasFood())
+	{
+		for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren
+			{
+				if(typeid(*(*list_iter)) == typeid(FOOD))
+				{
+					item = (*list_iter);
+					this->itemsOnArea.erase(list_iter);
+
+					return item;
+				}
+
+			}
+
+	}
 
 	return NULL;
 }
 
 ITEM* AREA::getWater()
 {
+	ITEM* item;
+
+		if(this->hasWater())
+		{
+			for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+				{
+					if(typeid(*(*list_iter)) == typeid(WATER))
+					{
+						item = (*list_iter);
+						this->itemsOnArea.erase(list_iter);
+
+						return item;
+					}
+
+				}
+
+		}
 
 	return NULL;
 }

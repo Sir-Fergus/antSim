@@ -22,7 +22,7 @@ class ANT : public ITEM
 	//string	role;
  	list<ITEM *> payload;
 
- 	void act(unsigned int currTick);
+ 	void act(unsigned int currTick, int mode);
 
 	ANT();
 	~ANT();

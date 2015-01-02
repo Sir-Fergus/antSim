@@ -19,7 +19,7 @@ int main()
 
 	int i;
 
-	env->placeInital(10,10,10);
+	env->placeInital(1,0,0);
 	for(i=0;i<=10;i++)
 	{
 		env->actAll(1);

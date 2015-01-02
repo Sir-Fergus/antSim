@@ -14,7 +14,7 @@ ENVIRONMENT::ENVIRONMENT()
 	this->envExists= 0;
 	this->sizeX = 0;
 	this->sizeY = 0;
-	this->tickCnt = 0;
+	this->tickCnt = 1;
 
 }
 
@@ -41,14 +41,14 @@ int ENVIRONMENT::createEnvironment(unsigned int sizeX, unsigned int sizeY)
 
 			newArea= new AREA;
 
-			if(i == 0)
+			if(i == 0)	//Wenn in erster Spalte
 			{
 				newArea->north = lastArea;
 				lastArea->south= newArea;
-			}else if(j == 0)
+			}else if(j == 0)	//Wenn in erster Zeile
 			{
 				lastArea = this->startArea;
-				while(lastArea->east != NULL) lastArea = lastArea->east;
+				while(lastArea->east != NULL) lastArea = lastArea->east; //lastArea Pointer auf den beginn der nächsten Spalte setzen, dazu wird in der ersten Zeile ganz nach rechts gegangen
 
 				newArea->west = lastArea;
 				lastArea->east = newArea;
@@ -241,6 +241,7 @@ void ENVIRONMENT::actAll(int mode)
 {
 	unsigned int i, k, j;
 	AREA* currArea;
+	ITEM* currItem;
 	list<ITEM *> list;
 	bool listEdited = false;
 
@@ -267,18 +268,21 @@ void ENVIRONMENT::actAll(int mode)
 				{
 					if((*list_iter)->hasTombstone)
 					{
+						currItem = (*list_iter);
 						list.erase(list_iter);
 						listEdited = true;
+						delete currArea;
 						break;
 					}
-					else if((*list_iter)->age <= this->tickCnt)
+					else if((*list_iter)->age < this->tickCnt)
 					{
-						(*list_iter)->act(this->tickCnt);
+						(*list_iter)->act(this->tickCnt, mode);
 						(*list_iter)->age++;
 
 						if((*list_iter)->changedList)	//Wenn Act die ITEM List verändert hat Iteration neu starten.
 						{
 							listEdited = true;
+							(*list_iter)->changedList = false;
 							break;
 						}
 					}

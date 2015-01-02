@@ -11,17 +11,16 @@
 #include <iostream>
 #include <stdlib.h>
 #include "../header/ITEM.h"
+#include "../header/AREA.h"
 
 using namespace std;
-
-class FOOD; //Forward decleration
 
 
 class ANTHILL : public ITEM
 {
 public:
 
-	void act(unsigned int currTick);
+	void act(unsigned int currTick, int mode);
 
 	ANTHILL();
 	~ANTHILL();

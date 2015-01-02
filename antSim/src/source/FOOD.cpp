@@ -21,10 +21,9 @@ FOOD::~FOOD() {
 	// TODO Auto-generated destructor stub
 }
 
-void FOOD::act(unsigned int currTick)
+void FOOD::act(unsigned int currTick, int mode)
 {
-
-	cout << "Food" << endl;
+	if(mode == 1) cout << "Food" << endl;
 }
 
 

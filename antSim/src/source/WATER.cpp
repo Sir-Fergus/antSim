@@ -22,9 +22,9 @@ WATER::~WATER() {
 	// TODO Auto-generated destructor stub
 }
 
-void WATER::act(unsigned int currTick)
+void WATER::act(unsigned int currTick, int mode)
 {
 
-	cout << "Water" << endl;
+	if(mode == 1) cout << "Water" << endl;
 }
 
