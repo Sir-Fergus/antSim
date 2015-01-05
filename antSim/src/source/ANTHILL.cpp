@@ -22,14 +22,18 @@ ANTHILL::~ANTHILL() {
 void ANTHILL::act(unsigned int currTick, int mode)
 {
 		bool item, item1;
+		ITEM* temp, *temp1;
 
 		item = this->ownArea->hasFood();
 		item1 = this->ownArea->hasWater();
 
 		if(item && item1)		//Create new Ant when Food is on Anthill Area
 		{
-			delete(this->ownArea->getFood());
-			delete(this->ownArea->getWater());
+			temp = this->ownArea->getFood();
+			temp1 = this->ownArea->getWater();
+
+			temp->hasTombstone = true;
+			temp1->hasTombstone = true;
 
 			this->ownArea->placeAnt(NULL);
 
@@ -38,4 +42,5 @@ void ANTHILL::act(unsigned int currTick, int mode)
 		}
 
 		if(mode == 1) cout << "Ameisenhügel" << endl;
+		this->age++;
 }

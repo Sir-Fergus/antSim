@@ -94,31 +94,31 @@ ITEM* AREA::placeWater(ITEM* transferItem)
 bool AREA::hasFood()
 {
 
-	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
 	{
-		if(typeid(*(*list_iter)) == typeid(FOOD))
+		if(typeid(*(*list_iter1)) == typeid(FOOD) && !(*list_iter1)->hasTombstone)
 		{
-			return 1; //Food found
+			return true; //Food found
 		}
 
 	}
 
-	return 0; //no Food found
+	return false; //no Food found
 }
 
 bool AREA::hasWater()
 {
 
-	for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren
 	{
-		if(typeid(*(*list_iter)) == typeid(WATER))
+		if(typeid(*(*list_iter1)) == typeid(WATER) && !(*list_iter1)->hasTombstone)
 		{
-			return 1; //Water found
+			return true; //Water found
 		}
 
 	}
 
-	return 0; //no Water found
+	return false; //no Water found
 }
 
 ITEM* AREA::getFood()
@@ -127,14 +127,15 @@ ITEM* AREA::getFood()
 
 	if(this->hasFood())
 	{
-		for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren
+		for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren
 			{
-				if(typeid(*(*list_iter)) == typeid(FOOD))
+				//item = (*list_iter); //debug
+				if(typeid(*(*list_iter1)) == typeid(FOOD)  && !(*list_iter1)->hasTombstone)
 				{
-					item = (*list_iter);
-					this->itemsOnArea.erase(list_iter);
+					item = (*list_iter1);
+					this->itemsOnArea.erase(list_iter1); // Items aus liste nehmen
 
-					return item;
+					return item; //rückgabe des entnommenen Items
 				}
 
 			}
@@ -150,14 +151,15 @@ ITEM* AREA::getWater()
 
 		if(this->hasWater())
 		{
-			for(std::list<ITEM *>::iterator list_iter = this->itemsOnArea.begin(); list_iter != this->itemsOnArea.end(); list_iter++) //Durch Area Item List iterrieren und acten
+			for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
 				{
-					if(typeid(*(*list_iter)) == typeid(WATER))
+					//item = (*list_iter); //debug
+					if(typeid(*(*list_iter1)) == typeid(WATER)  && !(*list_iter1)->hasTombstone)
 					{
-						item = (*list_iter);
-						this->itemsOnArea.erase(list_iter);
+						item = (*list_iter1);
+						this->itemsOnArea.erase(list_iter1); // Items aus liste nehmen
 
-						return item;
+						return item; //rückgabe des entnommenen Items
 					}
 
 				}
@@ -167,3 +169,29 @@ ITEM* AREA::getWater()
 	return NULL;
 }
 
+void AREA::deleteTombstones()
+{
+	list<ITEM *> *list;
+	std::list<ITEM *>::iterator list_iter1, current;
+
+	ITEM* currItem;
+
+	list = &this->itemsOnArea;
+
+	for(list_iter1 = list->begin(); list_iter1 != list->end();) //Durch Area Item List iterrieren und objekte löschen die tombstone haben
+	{
+		if((*list_iter1)->hasTombstone)
+		{
+			currItem = (*list_iter1);
+			current = list_iter1;
+			list_iter1 = list->erase(current);
+			delete(currItem);
+			continue;
+		}
+		else
+		{
+			list_iter1++;
+		}
+	}
+
+}

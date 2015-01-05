@@ -29,6 +29,7 @@ void ANT::act(unsigned int currTick, int mode)
 
 
 	if(mode == 1) cout << "Ameise" << endl;
+	this->age++;
 }
 
 

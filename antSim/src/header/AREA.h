@@ -40,6 +40,7 @@ class AREA
 
 		ITEM* getFood();
 		ITEM* getWater();
+		void deleteTombstones();
 
 
 	AREA();

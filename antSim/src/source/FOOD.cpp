@@ -24,6 +24,7 @@ FOOD::~FOOD() {
 void FOOD::act(unsigned int currTick, int mode)
 {
 	if(mode == 1) cout << "Food" << endl;
+	this->age++;
 }
 
 

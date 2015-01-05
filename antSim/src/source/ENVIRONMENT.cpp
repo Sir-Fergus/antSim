@@ -14,7 +14,7 @@ ENVIRONMENT::ENVIRONMENT()
 	this->envExists= 0;
 	this->sizeX = 0;
 	this->sizeY = 0;
-	this->tickCnt = 1;
+	this->tickCnt = 0;
 
 }
 
@@ -241,10 +241,12 @@ void ENVIRONMENT::actAll(int mode)
 {
 	unsigned int i, k, j;
 	AREA* currArea;
-	ITEM* currItem;
-	list<ITEM *> list;
+	//ITEM* currItem; debug
+	list<ITEM *> *list;
 	bool listEdited = false;
+	std::list<ITEM *>::iterator current, list_iter;
 
+	this->tickCnt++;
 	currArea = this->startArea;
 
 	for(i=0; i<this->sizeX; i++)
@@ -256,28 +258,21 @@ void ENVIRONMENT::actAll(int mode)
 
 		for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
 		{
-			list = currArea->itemsOnArea;
 
 			if(mode == 1) cout<<"----- AREA x: "<<i<<" y: "<<j<<" -----"<<endl;
 
 			do //Iteration der Area Item List neu starten wenn etwas gelöscht wurde -> sonst besteht gefahr der Speicherzugriffsverletzung durch den Iterator
 			{
 				listEdited = false;
+				list = &currArea->itemsOnArea; //An dieser Stelle muss die Liste noch einmal geholt werden. Ansonsten wird die Liste nicht aktualisiert und es sind kaputte ITEM Pointer vorhandne wegen der Bearbeitung die geschehen ist.
 
-				for(std::list<ITEM *>::iterator list_iter = list.begin(); list_iter != list.end(); list_iter++) //Durch Area Item List iterrieren und acten
+				for(list_iter = list->begin(); list_iter != list->end(); ++list_iter) //Durch Area Item List iterrieren und acten
 				{
-					if((*list_iter)->hasTombstone)
-					{
-						currItem = (*list_iter);
-						list.erase(list_iter);
-						listEdited = true;
-						delete currArea;
-						break;
-					}
-					else if((*list_iter)->age < this->tickCnt)
+					//currItem = (*list_iter); //debug
+
+					if((*list_iter)->age < this->tickCnt && !(*list_iter)->hasTombstone)
 					{
 						(*list_iter)->act(this->tickCnt, mode);
-						(*list_iter)->age++;
 
 						if((*list_iter)->changedList)	//Wenn Act die ITEM List verändert hat Iteration neu starten.
 						{
@@ -290,12 +285,12 @@ void ENVIRONMENT::actAll(int mode)
 
 			}while(listEdited);
 
+			currArea->deleteTombstones();
+
 			currArea = currArea->south;
 		}
 		currArea = this->startArea;
 	}
-	this->tickCnt++;
-
 }
 
 

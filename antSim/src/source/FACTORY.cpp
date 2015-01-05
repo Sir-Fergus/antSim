@@ -43,7 +43,7 @@ ITEM* FACTORY::createAnthill()
 
 	newOne = new ANTHILL;
 	newOne->age = this->env->tickCnt;
-	newOne->maxAge = this->env->tickCnt + this->defaultMaxAgeGlobal;
+	newOne->maxAge = 1000; //this->env->tickCnt + this->defaultMaxAgeGlobal;
 
 	return newOne;
 }
