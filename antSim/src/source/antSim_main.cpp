@@ -13,7 +13,7 @@
 int main()
 {
 	int i;
-	char a
+	char a;
 
 	ENVIRONMENT* env;
 	env = ENVIRONMENT::createInstance(11,11);
@@ -22,8 +22,8 @@ int main()
 
 
 
-	env->placeInital(1,10,10,5);
-	for(i=0;i<=20;i++)
+	env->placeInital(1,1,10,5);
+	for(i=0;i<=21;i++)
 	{
 		env->actAll(0);
 		env->printEnvironment();
