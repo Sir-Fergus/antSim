@@ -22,10 +22,12 @@ WATER::~WATER() {
 	// TODO Auto-generated destructor stub
 }
 
-void WATER::act(unsigned int currTick, int mode)
+int WATER::act(unsigned int currTick, int mode)
 {
 
 	if(mode == 1) cout << "Water" << endl;
 	this->age++;
+
+	return 0;
 }
 

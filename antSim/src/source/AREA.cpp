@@ -17,6 +17,7 @@ AREA::AREA()
 	this->west=NULL;
 	this->east=NULL;
 	this->factory= FACTORY::create_instance();
+	this->isNest=false;
 
 
 	}
@@ -55,6 +56,7 @@ ITEM* AREA::placeAnthill(ITEM* transferItem)
 		}
 	item->ownArea = this;
 	this->itemsOnArea.push_front(item);
+	this->isNest = true;
 
 	return item;
 }
@@ -194,4 +196,106 @@ void AREA::deleteTombstones()
 		}
 	}
 
+}
+
+unsigned int AREA::getAntNum()
+{
+	unsigned int num=0;
+
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+	{
+		if(typeid(*(*list_iter1)) == typeid(ANT) && !(*list_iter1)->hasTombstone)
+		{
+			num++; //ANT found
+		}
+
+	}
+
+	return num;
+}
+unsigned int AREA::getFoodNum()
+{
+	unsigned int num=0;
+
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+	{
+		if(typeid(*(*list_iter1)) == typeid(FOOD) && !(*list_iter1)->hasTombstone)
+		{
+			num++; //Food found
+		}
+
+	}
+
+	return num;
+}
+unsigned int AREA::getWaterNum()
+{
+	unsigned int num=0;
+
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+	{
+		if(typeid(*(*list_iter1)) == typeid(WATER) && !(*list_iter1)->hasTombstone)
+		{
+			num++; //Water found
+		}
+
+	}
+
+	return num;
+}
+
+void AREA::moveNorth(ITEM* item)
+{
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+	{
+		if((*list_iter1) == item)
+		{
+			this->itemsOnArea.erase(list_iter1);
+			this->north->placeAnt(item);
+			break;
+		}
+
+	}
+}
+
+
+void AREA::moveSouth(ITEM* item)
+{
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+		{
+			if((*list_iter1) == item)
+			{
+				this->itemsOnArea.erase(list_iter1);
+				this->south->placeAnt(item);
+				break;
+			}
+
+		}
+
+}
+void AREA::moveWest(ITEM* item)
+{
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+		{
+			if((*list_iter1) == item)
+			{
+				this->itemsOnArea.erase(list_iter1);
+				this->west->placeAnt(item);
+				break;
+			}
+
+		}
+}
+void AREA::moveEast(ITEM* item)
+{
+	for(std::list<ITEM *>::iterator list_iter1 = this->itemsOnArea.begin(); list_iter1 != this->itemsOnArea.end(); list_iter1++) //Durch Area Item List iterrieren und acten
+		{
+			if((*list_iter1) == item)
+			{
+				this->itemsOnArea.erase(list_iter1);
+				this->east->placeAnt(item);
+				break;
+			}
+
+		}
 }

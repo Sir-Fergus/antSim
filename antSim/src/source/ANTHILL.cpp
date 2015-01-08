@@ -19,10 +19,11 @@ ANTHILL::~ANTHILL() {
 	// TODO Auto-generated destructor stub
 }
 
-void ANTHILL::act(unsigned int currTick, int mode)
+int ANTHILL::act(unsigned int currTick, int mode)
 {
 		bool item, item1;
 		ITEM* temp, *temp1;
+		int status = 0;
 
 		item = this->ownArea->hasFood();
 		item1 = this->ownArea->hasWater();
@@ -37,10 +38,12 @@ void ANTHILL::act(unsigned int currTick, int mode)
 
 			this->ownArea->placeAnt(NULL);
 
-			this->changedList = true;
+			//this->changedList = true; abgelöst
+			status = 1;
 
 		}
 
 		if(mode == 1) cout << "Ameisenhügel" << endl;
 		this->age++;
+		return status;
 }

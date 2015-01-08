@@ -9,6 +9,7 @@
 #define SRC_ENVIRONMENT_H_
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <time.h>
 #include <stdlib.h>
@@ -30,7 +31,7 @@ class ENVIRONMENT
 		unsigned int tickCnt;
 		void printEnvironment();
 		static ENVIRONMENT* createInstance(unsigned int sizeX, unsigned int sizeY);
-		void placeInital(unsigned int ant, unsigned int food, unsigned int water);
+		void placeInital(unsigned int ant, unsigned int food, unsigned int water, unsigned int maxPileSize);
 		void actAll(int mode);
 
 		~ENVIRONMENT();

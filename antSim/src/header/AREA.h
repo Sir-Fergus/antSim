@@ -29,6 +29,7 @@ class AREA
 		AREA *west;		//Neighbour Field Left
 		AREA *east;		//Neighbour Field Right
 		FACTORY* factory;
+		bool isNest;
 
 		ITEM* placeAnt(ITEM* transferItem);
 		ITEM* placeAnthill(ITEM* transferItem);
@@ -37,10 +38,18 @@ class AREA
 
 		bool hasFood();
 		bool hasWater();
-
 		ITEM* getFood();
 		ITEM* getWater();
 		void deleteTombstones();
+
+		unsigned int getAntNum();
+		unsigned int getFoodNum();
+		unsigned int getWaterNum();
+
+		void moveNorth(ITEM* item);
+		void moveSouth(ITEM* item);
+		void moveWest(ITEM* item);
+		void moveEast(ITEM* item);
 
 
 	AREA();

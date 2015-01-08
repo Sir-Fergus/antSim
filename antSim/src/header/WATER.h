@@ -17,7 +17,7 @@ class WATER : public ITEM
 {
 public:
 
-	void act(unsigned int currTick, int mode);
+	int act(unsigned int currTick, int mode);
 
 	WATER();
 	virtual ~WATER();

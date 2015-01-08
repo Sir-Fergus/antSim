@@ -73,36 +73,49 @@ void ENVIRONMENT::printEnvironment()
 	AREA *currArea;
 	AREA *currArea1;
 
+	unsigned int i, j, k, a, w, f;
+
 	currArea=this->startArea;
 	currArea1 = currArea;
 
+	char line[] =" ---------";
 
-	while(currArea->east != NULL)
+	cout<<"Tick Number: "<<this->tickCnt<< endl;
+
+	for(i = 0; i < this->sizeX;i++) //Trennlinie zwischen Zeilen
+	{
+		cout<<line;
+		if(i+1 == this->sizeX) cout<<endl;
+
+	}
+
+	for(j=0; j < this->sizeY; j++)
 	{
 
 		currArea1 = currArea;
 
-		while(currArea1->south != NULL)
+		cout<<"|";
+		for(k=0; k < this->sizeX; k++) //Einträge auf den Areas
 		{
-			cout<<"X ";
-			currArea1 = currArea1->south;
+			if((a=currArea1->getAntNum()) == 0) cout<<setfill(' ')<<setw(3)<<" ";
+			else cout<<setw(2)<<a<<"A";
+			if((f=currArea1->getFoodNum()) == 0) cout<<setfill(' ')<<setw(3)<<" ";
+			else cout<<setw(2)<<f<<"F";
+			if((w=currArea1->getWaterNum()) == 0) cout<<setfill(' ')<<setw(3)<<" ";
+			else cout<<setw(2)<<w<<"W";
+			cout<<"|";
+			currArea1 = currArea1->east;
 		}
+		cout<<endl;
 
-	cout<<"X"<<endl;
-	currArea = currArea->east;
+		for(i = 0; i < this->sizeX;i++) //Trennlinie zwischen Zeilen
+		{
+			cout<<line;
+			if(i+1 == this->sizeX) cout<<endl;
+
+		}
+		currArea = currArea->south;
 	}
-
-
-	currArea1 = currArea;
-
-	while(currArea1->south != NULL)
-	{
-		cout<<"X ";
-		currArea1 = currArea1->south;
-	}
-
-	cout<<"X"<<endl;
-
 
 
 	/*Eventuell Einen Printmodus für die Ausgabe der Listen auf den Areas machen
@@ -150,96 +163,98 @@ ENVIRONMENT* ENVIRONMENT::createInstance(unsigned int sizeX, unsigned int sizeY)
 	return &instance;
 }
 
-void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int water)
+void ENVIRONMENT::placeInital(unsigned int ant, unsigned int food, unsigned int water, unsigned int maxPileSize)
 {
-	unsigned int i, j, k, i1, randNum, cntAnt, cntFood, cntWater;
+	unsigned int i, j, k,randNum, xCoord, yCoord;
 	AREA* currArea;
 
 	currArea = this->startArea;
-	cntAnt = ant;
-	cntFood = food;
-	cntWater = water;
 
 	srand(time(0));
 
+	xCoord = this->sizeX /2;
+	yCoord = this->sizeY /2;
 
-		for(i=0; i<this->sizeX; i++)
+	for(i=0; i<xCoord; i++)		//X Koordinate anspringen
+	{
+		currArea = currArea->east;
+	}
+	for(i=0; i<yCoord; i++)		//Y Koordinate anspringen
+	{
+		currArea = currArea->south;
+	}
+
+	for(i=0; i < ant; i++)	//Ants Auf Anthill setzen
+	{
+		if(i==0)
 		{
-			for(k=0; k<i; k++) //In neue spalte springen
+			currArea->placeAnthill(NULL);
+			for(j=0; j<10; j++)
+			{
+				currArea->placeFood(NULL);
+				currArea->placeWater(NULL);
+			}
+		}
+
+		currArea->placeAnt(NULL);
+	}
+
+	for(j=0; j < food; )	//Food verteilen
+	{
+		currArea= this->startArea;
+		xCoord = rand()%(this->sizeX);
+		yCoord = rand()%(this->sizeY);
+
+		for(i=0; i<xCoord; i++)		//X Koordinate anspringen
+		{
+			currArea = currArea->east;
+		}
+		for(i=0; i<yCoord; i++)		//Y Koordinate anspringen
+		{
+			currArea = currArea->south;
+		}
+
+		randNum = rand()%maxPileSize +1; 	// +1 damit area nicht umsonst angesprungen wird, würde der fall sein wenn randNum 0 wird und damit kein Food gedropt wird.
+		for(k=0; k < randNum; k++)
+		{
+			currArea->placeFood(NULL);
+			j++; //food counter increment -> je nach dem wieviel auf die Area gesetzt wird.
+
+		}
+	}
+
+	for(j=0; j < water; )	//Water verteilen
+		{
+			currArea= this->startArea;
+			xCoord = rand()%(this->sizeX);
+			yCoord = rand()%(this->sizeY);
+
+			for(i=0; i<xCoord; i++)		//X Koordinate anspringen
 			{
 				currArea = currArea->east;
 			}
-
-			for(j=0; j<this->sizeY; j++) //Spalte durchlaufen
+			for(i=0; i<yCoord; i++)		//Y Koordinate anspringen
 			{
-				if(i == sizeX/2 && j == sizeY/2)	//place Anthill und Ants in the middle
-				{
-					currArea->placeAnthill(NULL);
-					for(; cntAnt>0; cntAnt--)
-					{
-						currArea->placeAnt(NULL);
-					}
-					for(i1=0; i1<5; i1++)
-					{
-						currArea->placeFood(NULL);
-						currArea->placeWater(NULL);
-					}
-				}
-
-				//for(i1=0;i1<r1;i1++) //Anzahl des Items welche auf File kommen Wie wird die vorgegebene zahl auf das feld zufällig aufgeteilt?
-
-//				if(cntAnt != 0)		//place Ants on Area
-//				{
-//					randNum = rand()%3;
-//					for(i1=0; i1<randNum; i1++)
-//					{
-//						if(cntAnt != 0)
-//						{
-//							currArea->placeAnt();
-//							cntAnt--;
-//						}
-//					}
-//				}
-
-				if(cntFood != 0)		//place Food on Area
-				{
-					randNum = rand()%3;
-					for(i1=0; i1<randNum; i1++)
-					{
-						if(cntFood != 0)
-						{
-							currArea->placeFood(NULL);
-							cntFood--;
-						}
-					}
-				}
-
-				if(cntWater != 0)		//place Water on Area
-				{
-					randNum = rand()%3;
-					for(i1=0; i1<randNum; i1++)
-					{
-						if(cntWater != 0)
-						{
-							currArea->placeWater(NULL);
-							cntWater--;
-						}
-					}
-				}
-
 				currArea = currArea->south;
 			}
-			currArea = startArea;
 
+			randNum = rand()%maxPileSize +1; 	// +1 damit area nicht umsonst angesprungen wird, würde der fall sein wenn randNum 0 wird und damit kein Food gedropt wird.
+			for(k=0; k < randNum; k++)
+			{
+				currArea->placeFood(NULL);
+				j++; //food counter increment -> je nach dem wieviel auf die Area gesetzt wird.
+
+			}
 		}
 
-		cout<<"Rest Ant: "<<cntAnt<<"\nRest Food: "<<cntFood<<"\nRest Water: "<<cntWater<<endl;
+		//cout<<"Rest Ant: "<<cntAnt<<"\nRest Food: "<<cntFood<<"\nRest Water: "<<cntWater<<endl;
 
 }
 
 void ENVIRONMENT::actAll(int mode)
 {
 	unsigned int i, k, j;
+	int status = 0;
 	AREA* currArea;
 	//ITEM* currItem; debug
 	list<ITEM *> *list;
@@ -272,12 +287,12 @@ void ENVIRONMENT::actAll(int mode)
 
 					if((*list_iter)->age < this->tickCnt && !(*list_iter)->hasTombstone)
 					{
-						(*list_iter)->act(this->tickCnt, mode);
+						status = (*list_iter)->act(this->tickCnt, mode);
 
-						if((*list_iter)->changedList)	//Wenn Act die ITEM List verändert hat Iteration neu starten.
+						if(status)	//Wenn Act die ITEM List verändert hat Iteration neu starten.
 						{
 							listEdited = true;
-							(*list_iter)->changedList = false;
+							//(*list_iter)->changedList = false; abgelöst
 							break;
 						}
 					}

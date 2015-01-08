@@ -12,19 +12,24 @@
 
 int main()
 {
-	ENVIRONMENT* env;
-	env = ENVIRONMENT::createInstance(3,3);
-
-	env->startArea->factory->setDefaultMaxAgeGlobal(8);	//Setze Default Max Age für alle Items die erstellt werden
-
 	int i;
+	char a
 
-	env->placeInital(1,10,10);
-	for(i=0;i<=15;i++)
+	ENVIRONMENT* env;
+	env = ENVIRONMENT::createInstance(11,11);
+
+	env->startArea->factory->setDefaultMaxAgeGlobal(50);	//Setze Default Max Age für alle Items die erstellt werden
+
+
+
+	env->placeInital(1,10,10,5);
+	for(i=0;i<=20;i++)
 	{
-		env->actAll(1);
+		env->actAll(0);
+		env->printEnvironment();
+		//cin >>a;
 	}
-	env->printEnvironment();
+
 	return 0;
 }
 
