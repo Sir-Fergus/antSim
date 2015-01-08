@@ -23,7 +23,7 @@ int main()
 
 
 	env->placeInital(1,1,10,5);
-	for(i=0;i<=21;i++)
+	for(i=0;i<=20;i++)
 	{
 		env->actAll(0);
 		env->printEnvironment();
